@@ -25,15 +25,36 @@ docker run -d \
 - `IPT_WEB_PASSWORD`: 网页认证密码，默认：admin
 - `IPT_WEB_ADDRESS`: 程序监听地址地址，默认：10001
 
+
+
 ### 直接安装
 ```shell
 git clone https://github.com/pretty66/iptables-web.git
 cd iptables-web
 make
-# 直接运行
+```
+- ##### 直接运行
+```shell
 ./iptables-server -a :10001 -u admin -p admin
-# 后台运行
+```
+- ##### 后台运行
+```shell
 nohup ./iptables-server -a :10001 -u admin -p admin > /dev/null 2>&1 &
+```
+- ##### 注册为service管理
+```shell
+# 复制模版
+cp ./iptables-web.service /usr/lib/systemd/system
+# 修改 端口 用户名 密码
+vim /usr/lib/systemd/system/iptables-web.service
+# 开机自启动
+systemctl enable iptables-web.service
+# 启动服务
+systemctl start iptables-web.service
+# 关闭服务
+systemctl stop iptables-web.service
+# 查看服务进程
+ps -ef | grep iptables-web
 ```
 
 ### License

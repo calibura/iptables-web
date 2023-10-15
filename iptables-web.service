@@ -1,0 +1,12 @@
+[Unit]
+Description=iptables-web
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=nohup /etc/iptables-web/iptables-server -a :10001 -u admin -p admin > /dev/null 2>&1 &
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
